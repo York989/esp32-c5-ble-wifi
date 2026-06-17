@@ -2,7 +2,7 @@
 
 ## 项目结构与模块组织
 
-当前仓库是早期阶段的 ESP BLE 项目，新增文件应遵循 ESP-IDF 的常见布局。应用入口代码放在 `main/`，可复用驱动、BLE 服务或业务组件放在 `components/<name>/`，测试代码放在 `tests/` 或 `components/<name>/test/`。根目录保留项目级构建与配置文件，例如 `CMakeLists.txt`、`sdkconfig.defaults`、可选的 `partitions.csv`。文档统一放在 `docs/`：项目文档固定放在 `docs/project/`，BLE 学习文档固定放在 `docs/ble-learning/`。
+当前仓库是早期阶段的 ESP BLE 项目，新增文件应遵循 ESP-IDF 的常见布局。应用入口代码放在 `main/`，可复用驱动、BLE 服务或业务组件放在 `components/<name>/`，测试代码放在 `tests/` 或 `components/<name>/test/`。根目录保留项目级构建与配置文件，例如 `CMakeLists.txt`、`sdkconfig.defaults`、可选的 `partitions.csv`。文档统一放在 `docs/`：项目文档固定放在 `docs/project/`，BLE 学习文档固定放在 `docs/ble-learning/`，板卡原理图、用户手册和整理笔记固定放在 `docs/data/`。
 
 ## 构建、测试与开发命令
 

@@ -46,6 +46,7 @@ WSL2 内的 Codex 全局 skill 目录是：
 - `find-skills`：来源 `https://www.skills.sh/vercel-labs/skills/find-skills`
 - `brainstorming`：来源 `https://www.skills.sh/obra/superpowers/brainstorming`
 - `content-research-writer`：来源 `https://skills.sh/composiohq/awesome-codex-skills/content-research-writer`
+- `pdf`：来源 `https://skills.sh/openai/skills/pdf`，用于 PDF 渲染检查、文本抽取、PDF 生成和格式校验。
 
 安装落点：
 
@@ -53,6 +54,7 @@ WSL2 内的 Codex 全局 skill 目录是：
 /home/u888/.codex/skills/find-skills/SKILL.md
 /home/u888/.codex/skills/brainstorming/SKILL.md
 /home/u888/.codex/skills/content-research-writer/SKILL.md
+/home/u888/.codex/skills/pdf/SKILL.md
 ```
 
 ## 当前 skill 调研结论
