@@ -8,10 +8,10 @@
 
 请在已初始化 ESP-IDF 环境的 shell 中运行命令。
 
-- `idf.py set-target esp32`：首次构建前选择目标芯片；如使用其他板卡，请替换为实际 target。
+- `idf.py set-target esp32c5`：首次构建前选择当前项目目标芯片；如使用其他板卡，请替换为实际 target。
 - `idf.py menuconfig`：配置 BLE、分区、日志级别和板级选项。
 - `idf.py build`：编译固件并检查 CMake 配置。
-- `idf.py -p /dev/ttyUSB0 flash monitor`：烧录开发板并打开串口日志。
+- `idf.py -p /dev/ttyACM0 flash monitor`：烧录开发板并打开串口日志。
 - `idf.py fullclean`：当配置或构建缓存异常时清理生成文件。
 
 ## 代码风格与命名规范
@@ -24,7 +24,7 @@
 
 ## 提交与 Pull Request 规范
 
-本仓库采用 Conventional Commits，例如 `feat(ble): add advertising service`、`fix(build): correct target config` 或 `docs: add flashing notes`。Pull Request 应包含简要说明、关联 issue、目标硬件、ESP-IDF 版本、配置变更，以及实际运行过的构建、测试或烧录命令。
+提交说明必须使用中文。可以保留 Conventional Commits 的类型前缀，例如 `feat(ble): 增加广播服务`、`fix(build): 修正目标芯片配置` 或 `docs: 更新烧录说明`。Pull Request 应包含简要说明、关联 issue、目标硬件、ESP-IDF 版本、配置变更，以及实际运行过的构建、测试或烧录命令。
 
 ## 安全与配置建议
 
