@@ -9,7 +9,8 @@
 - 提供 Heart Rate Service：UUID `0x180D`。
 - 提供 Heart Rate Measurement Characteristic：UUID `0x2A37`，支持读取和 indication。
 - 提供 Automation IO Service：UUID `0x1815`。
-- 提供 LED 写入特征：写入 `0x01` 点亮，写入 `0x00` 熄灭。
+- 提供 LED 写入特征：写入非零值恢复板载 RGB LED 流水彩虹，写入 `0x00` 熄灭。
+- 板载 RGB LED 使用 `GPIO27`，上电后自动循环彩虹渐变。
 - 每秒生成一次模拟心率数据，并在订阅 indication 后主动上报。
 
 ## 硬件与环境
@@ -31,7 +32,8 @@ WSL2 默认不能直接使用 Windows 主机蓝牙。如果需要在 WSL2 内扫
 │   └── src/                 # 功能实现
 ├── docs/
 │   ├── project/             # 项目配置、构建、调试和迭代文档
-│   └── ble-learning/        # BLE 学习路线和学习笔记
+│   ├── ble-learning/        # BLE 学习路线和学习笔记
+│   └── data/                # 板卡原理图、用户手册和整理笔记
 ├── sdkconfig.defaults*      # 各目标芯片的默认配置
 ├── dependencies.lock        # ESP-IDF 组件依赖锁定文件
 └── AGENTS.md                # 仓库协作与代理规则
@@ -77,6 +79,7 @@ Ctrl+]
 
 - 项目运行方式、环境配置和调试结论写入 `docs/project/`。
 - BLE 学习资料按顺序写入 `docs/ble-learning/`。
+- 板卡原理图、用户手册和整理笔记写入 `docs/data/`。
 - BLE 服务、UUID、广播字段或硬件环境变化后，需要同步更新 README 和对应项目文档。
 
 ## 提交规范
