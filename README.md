@@ -27,9 +27,12 @@ WSL2 默认不能直接使用 Windows 主机蓝牙。如果需要在 WSL2 内扫
 
 ```text
 .
-├── main/                    # ESP-IDF 应用入口、BLE GAP/GATT、LED 和心率模拟逻辑
-│   ├── include/             # 项目头文件
-│   └── src/                 # 功能实现
+├── main/                    # ESP-IDF 应用入口，仅保留 app_main.c
+├── components/
+│   ├── app/                 # 应用编排层
+│   ├── svc/                 # BLE、LED 效果和心率等业务服务
+│   ├── drv/                 # RGB LED 等硬件驱动适配
+│   └── bsp/                 # 板级资源、IO 编号和硬件常量
 ├── docs/
 │   ├── project/             # 项目配置、构建、调试和迭代文档
 │   ├── ble-learning/        # BLE 学习路线和学习笔记
@@ -43,10 +46,10 @@ WSL2 默认不能直接使用 Windows 主机蓝牙。如果需要在 WSL2 内扫
 
 ## 构建、烧录与运行
 
-先进入已初始化 ESP-IDF 的 shell，或手动加载环境：
+先进入已初始化 ESP-IDF 的 shell，或手动加载当前 EIM/VS Code 安装生成的 ESP-IDF 环境：
 
 ```bash
-. /home/u888/esp/.espressif/v6.0.1/esp-idf/export.sh
+. /home/u888/.espressif/tools/activate_idf_v6.0.1.sh
 ```
 
 常用命令：
