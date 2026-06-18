@@ -2,7 +2,9 @@
 
 ## 项目结构与模块组织
 
-当前仓库是早期阶段的 ESP BLE 项目，新增文件应遵循 ESP-IDF 的常见布局。应用入口代码放在 `main/`，可复用驱动、BLE 服务或业务组件放在 `components/<name>/`，测试代码放在 `tests/` 或 `components/<name>/test/`。根目录保留项目级构建与配置文件，例如 `CMakeLists.txt`、`sdkconfig.defaults`、可选的 `partitions.csv`。文档统一放在 `docs/`：项目文档固定放在 `docs/project/`，BLE 学习文档固定放在 `docs/ble-learning/`，板卡原理图、用户手册和整理笔记固定放在 `docs/data/`。
+当前仓库是 ESP32-C5 BLE 项目，代码必须按 `app -> svc -> drv -> bsp` 分层组织。`main/` 只保留 ESP-IDF 入口，例如 `main/app_main.c`；项目代码放在 `components/`。`components/bsp/` 存放板级资源与 IO 定义；`components/drv/` 存放硬件驱动适配；`components/svc/` 存放业务服务；`components/app/` 存放应用编排。具体模块目录直接放 `.c` 与 `.h`，例如 `components/drv/rgb_led/drv_rgb_led.c` 和 `drv_rgb_led.h`，不再为每个模块额外拆 `include/`、`src/`。
+
+ESP-IDF 组件粒度按层划分：`bsp/`、`drv/`、`svc/`、`app/` 这四个层级目录可各自维护一个 `CMakeLists.txt`；普通模块目录不单独放 `CMakeLists.txt`。依赖方向只能向下：`app` 可依赖 `svc`，`svc` 可依赖 `drv`，`drv` 可依赖 `bsp`，禁止反向依赖和跨层乱调。文档统一放在 `docs/`：项目文档在 `docs/project/`，BLE 学习文档在 `docs/ble-learning/`，板卡原理图、用户手册和整理笔记在 `docs/data/`。
 
 ## 构建、测试与开发命令
 
@@ -16,7 +18,9 @@
 
 ## 代码风格与命名规范
 
-遵循 ESP-IDF 示例项目中的 C/C++ 风格。建议使用 4 空格缩进；C 函数和文件名使用 `snake_case`；宏使用 `UPPER_SNAKE_CASE`；公开符号使用简短模块前缀，例如 `ble_gap_start()` 或 `sensor_ble_init()`。BLE UUID、特征名称和连接参数应定义为具名常量，避免散落在代码中的魔法值。
+遵循 ESP-IDF 示例项目中的 C/C++ 风格，使用 4 空格缩进。文件、函数、变量使用 `snake_case`，宏使用 `UPPER_SNAKE_CASE`。公开符号必须带层级和模块前缀，例如 `drv_rgb_led_init()`、`svc_led_effect_start()`、`svc_ble_start()`、`app_ble_demo_start()`。私有 `static` 函数也应保留模块前缀，方便跳转阅读。
+
+变量命名必须区分作用域。文件内私有静态变量使用 `s_<module>_<name>`，例如 `s_drv_rgb_led_strip`；跨文件只读全局常量使用 `g_<module>_<name>`，例如 `g_bsp_board_info`。默认禁止跨文件可变全局变量；确需使用时必须使用 `g_` 前缀，并在声明处说明所有权、线程保护方式和写入入口。局部变量不加作用域前缀，但命名必须表达含义。BLE UUID、特征名称、GPIO 编号和连接参数应定义为具名常量，避免魔法值。
 
 ## 测试规范
 
